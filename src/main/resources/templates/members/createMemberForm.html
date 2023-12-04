@@ -16,6 +16,7 @@
                    th:class="${#fields.hasErrors('name')}? 'form-control　fieldError' : 'form-control'">
             <p th:if="${#fields.hasErrors('name')}"
                th:errors="*{name}">Incorrect date</p>
+            <!--nameにerrorがあったらform-controlが errorを持ってcss(fieldError)を使うそしてMessage出力-->
         </div>
         <div class="form-group">
             <label th:for="city">都市</label>

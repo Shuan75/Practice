@@ -17,7 +17,7 @@ public class ItemRepository {
         if (item.getId() == null) { // jpaに貯蔵する前にdataがない
             em.persist(item);
         } else {
-            em.merge(item);
+            em.merge(item); // itemServiceに他の方法を書きました。
         }
     }
 

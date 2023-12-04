@@ -1,9 +1,6 @@
 package jpabook.jpashop.service;
 
-import jpabook.jpashop.domain.Delivery;
-import jpabook.jpashop.domain.Member;
-import jpabook.jpashop.domain.Order;
-import jpabook.jpashop.domain.OrderItem;
+import jpabook.jpashop.domain.*;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repsitory.ItemRepository;
 import jpabook.jpashop.repsitory.MemberRepository;
@@ -36,6 +33,7 @@ public class OrderService {
         //配送情報生成
         Delivery delivery = new Delivery();
         delivery.setAddress(member.getAddress());
+        delivery.setStatus(DeliveryStatus.REDAY);
 
         //注文商品生成
         OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);

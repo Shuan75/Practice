@@ -11,6 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
@@ -28,6 +30,8 @@ public class MemberController {
         // Valid => MemberFormにあるjakartaValidationを使う
         // BindingResult => errorを持ってコードを実行する (userにwhiterabelPageを表示することはできません)
         // だからどのようなerrorがあるのかを見られる
+        // MemberではなくMemberFormを作って使う理由は実務は単純なForm場面がないから
+        // 必要な情報だけを加工して送る
 
         if (result.hasErrors()) {
             return "members/createMemberForm";
@@ -40,5 +44,14 @@ public class MemberController {
 
         memberService.join(member);
         return "redirect:/"; // 加入時に再ロードしてはいけませんので、redirectを使う
+    }
+
+    // 全体照会
+    @GetMapping("/members")
+    public String list(Model model) {
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members); // (key,list)
+        return "members/memberList";
+
     }
 }
